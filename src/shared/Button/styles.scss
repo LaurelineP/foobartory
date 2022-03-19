@@ -1,0 +1,20 @@
+button {
+	width: 130px;
+	height: 50px;
+	background-color: #ddd;
+	padding: 15px 10px;
+	border-radius: 3px;
+	border-style: none;
+	box-shadow: 0 2px 1px 1px #777;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	align-self: center;
+
+	&:hover {
+		box-shadow: 0 2px 1.5px 1.5px #777;
+		cursor: pointer;
+	}
+	&:active {
+		box-shadow: 0 1px 1px 1px #777;
+	}
+}
