@@ -1,0 +1,33 @@
+	{/* <div id="mines-container">
+        <div id="foo-mine">FOO MINE</div>
+        <div id="foobar-mine">FOOBAR MINE</div>
+        <div id="bar-mine">BAR MINE</div>
+      </div> */}
+
+
+
+
+	/**
+	 * Each robot Should be aware of its own state :
+	 * 	- WHAT ACTION: [ move, mine ( coordinationStyle ), standby, forge ]
+	 * 	- its own timer
+	 */
+
+
+it('has 2 robots w/ expected id ( == getRobotCoordinations\'s first param )', () => {
+			renderComponent();
+			const robotsElements 	= screen.getAllByTestId('robot');
+			robotsElements.forEach( robot => {
+				expect( robot ).toHaveAttribute('id', expect.stringMatching(/robot-([0-9])+/g) );
+			})
+		})
+		const startReg 	= /start/i;
+		const stopReg 	= /stop/i;
+it('has 2 buttons [ start, stop ]', () => {
+	renderComponent();
+	const buttons = screen.getAllByRole('button');
+	expect( buttons ).toHaveLength( 2 );
+	buttons.forEach( button => {
+		expect( button ).toHaveAccessibleDescription();
+	});
+})

@@ -1,0 +1,116 @@
+/* -------------------------------------------------------------------------- */
+/*                                  VARIABLES                                 */
+/* -------------------------------------------------------------------------- */
+$robot-eyes-color: #0ff;
+$robot-scale: scale(0.7);
+$robot-skin-color: #ddf;
+
+/* -------------------------------------------------------------------------- */
+/*                                 ANIMATIONS                                 */
+/* -------------------------------------------------------------------------- */
+
+/* Animation: Float */
+@keyframes float {
+	from {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(20px);
+	}
+}
+// Standby circumstances - float with body
+@keyframes floatArms {
+	50% {
+		transform: translateY(20px);
+	}
+}
+
+// Mining circumstances - arms workings
+@keyframes workArms {
+	50% {
+		transform: rotate(1turn);
+	}
+}
+
+.robot-foo-bar-container {
+	transform		: $robot-scale;
+	border-radius	: 10px;
+	display			: flex;
+	margin			: 50px;
+	box-shadow		: 0 2px 4px 2px #ddd;
+	padding			: 30px;
+}
+
+.robot-foo-bar {
+	display		: inherit;
+	animation	: float 2.2s infinite ease-in-out;
+	.body {
+		display				: inherit;
+		margin				: 10px 2px;
+		background-color	: $robot-skin-color;
+		height				: 100px;
+		width				: 80px;
+		border-radius		: 50px 50px;
+		margin				: 8px;
+	}
+	.face {
+		background-color	: #000;
+		height				: 60%;
+		width				: 100%;
+		margin				: 20px 5px;
+		border-radius		: 50px;
+		display				: inherit;
+		justify-content		: space-between;
+		padding				: 4px;
+
+		// Eyes
+		&::before,
+		&::after {
+			content			: "";
+			background-color: $robot-eyes-color;
+			height			: 15px;
+			width			: 5px;
+			border-radius	: 25px;
+			margin			: 20px 13px;
+			box-shadow		: 0 0 3px 4px rgba(255, 255, 255, 0.5);
+		}
+	}
+	.arm {
+		width				: 12px;
+		height				: 50px;
+		background-color	: $robot-skin-color;
+		display				: inherit;
+		margin-top			: 35px;
+		&.left {
+			justify-content	: flex-start;
+			transform		: rotate(20deg);
+			border-radius	: 100px 10px;
+		}
+		&.right {
+			justify-content	: flex-end;
+			transform		: rotate(-20deg);
+			border-radius	: 10px 100px;
+		}
+	}
+	/* -------------------------------------------------------------------------- */
+	/*                           ACTION BASED ANIMATION                           */
+	/* -------------------------------------------------------------------------- */
+	/* ---------- "action"/"mode" classes: associates relative animation -------- */
+
+	/** --------- MODE: "standby" - standing --------- */
+	&.standby .arm,
+	&.stop .arm {
+		animation: floatArms 2.2s infinite ease-in-out alternate;
+	}
+
+	/** ----------- MODE: "start" - mining ----------- */
+	&.start {
+		.face::after,
+		.face::before {
+			background-color: yellow;
+		}
+		.arm {
+			animation: workArms 1.2s infinite forwards;
+		}
+	}
+}
